@@ -1,0 +1,27 @@
+From 996e092992a29346abafd52c2e165e48fab048d9 Mon Sep 17 00:00:00 2001
+From: Ubuntu <ubuntu@ip-172-31-6-137.eu-west-1.compute.internal>
+Date: Mon, 23 Mar 2020 15:38:58 +0000
+Subject: [PATCH] Upgrade cmake
+
+---
+ Utilities/cmlibarchive/CMakeLists.txt | 7 ++-----
+ 1 file changed, 2 insertions(+), 5 deletions(-)
+
+diff --git a/Utilities/cmlibarchive/CMakeLists.txt b/Utilities/cmlibarchive/CMakeLists.txt
+index 26a9aa9..b6950bd 100644
+--- a/Utilities/cmlibarchive/CMakeLists.txt
++++ b/Utilities/cmlibarchive/CMakeLists.txt
+@@ -427,11 +427,8 @@ LA_CHECK_INCLUDE_FILE("copyfile.h" HAVE_COPYFILE_H)
+ LA_CHECK_INCLUDE_FILE("direct.h" HAVE_DIRECT_H)
+ LA_CHECK_INCLUDE_FILE("dlfcn.h" HAVE_DLFCN_H)
+ LA_CHECK_INCLUDE_FILE("errno.h" HAVE_ERRNO_H)
+-LA_CHECK_INCLUDE_FILE("ext2fs/ext2_fs.h" HAVE_EXT2FS_EXT2_FS_H)
+-
+-CHECK_C_SOURCE_COMPILES("#include <sys/ioctl.h>
+-#include <ext2fs/ext2_fs.h>
+-int main(void) { return EXT2_IOC_GETFLAGS; }" HAVE_WORKING_EXT2_IOC_GETFLAGS)
++SET(HAVE_EXT2FS_EXT2_FS_H 0)
++SET(HAVE_WORKING_EXT2_IOC_GETFLAGS 0)
+ 
+ LA_CHECK_INCLUDE_FILE("fcntl.h" HAVE_FCNTL_H)
+ LA_CHECK_INCLUDE_FILE("grp.h" HAVE_GRP_H)
