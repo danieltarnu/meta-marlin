@@ -2,13 +2,13 @@ require gcc-common.inc
 
 # Third digit in PV should be incremented after a minor release
 
-PV = "8.2.0"
+PV = "8.4.0"
 
 # BINV should be incremented to a revision after a minor gcc release
 
-BINV = "8.2.0"
+BINV = "8.4.0"
 
-FILESEXTRAPATHS =. "${FILE_DIRNAME}/gcc-8.2:${FILE_DIRNAME}/gcc-8.2/backport:"
+FILESEXTRAPATHS =. "${FILE_DIRNAME}/gcc-8.4:${FILE_DIRNAME}/gcc-8.4/backport:"
 
 DEPENDS =+ "mpfr gmp libmpc zlib flex-native"
 NATIVEDEPS = "mpfr-native gmp-native libmpc-native zlib-native flex-native"
@@ -69,14 +69,13 @@ SRC_URI = "\
            file://0038-fix-segmentation-fault-in-precompiled-header-generat.patch \
            file://0039-Fix-for-testsuite-failure.patch \
            file://0040-Re-introduce-spe-commandline-options.patch \
-           file://0041-ARC-fix-spec-gen.patch \
            ${BACKPORTS} \
 "
 BACKPORTS = "\
            file://CVE-2019-14250.patch \
 "
-SRC_URI[md5sum] = "4ab282f414676496483b3e1793d07862"
-SRC_URI[sha256sum] = "196c3c04ba2613f893283977e6011b2345d1cd1af9abeac58e916b1aab3e0080"
+SRC_URI[md5sum] = "bb815a8e3b7be43c4a26fa89dbbd9795"
+SRC_URI[sha256sum] = "e30a6e52d10e1f27ed55104ad233c30bd1e99cfb5ff98ab022dc941edd1b2dd4"
 
 S = "${TMPDIR}/work-shared/gcc-${PV}-${PR}/gcc-${PV}"
 #S = "${TMPDIR}/work-shared/gcc-${PV}-${PR}/git"
