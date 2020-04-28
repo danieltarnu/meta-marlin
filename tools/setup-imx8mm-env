@@ -5,7 +5,7 @@ EULA=1
 
 . fsl-setup-release.sh $@
 
-declare -a ENVIRONMENT=('../sources/meta-marlin/tools/setup-compulab-env \
+declare -a ENVIRONMENT=('../sources/meta-marlin/tools/setup-marlin-env \
 		../sources/meta-marlin/tools/setup-user-env')
 
 for env in ${ENVIRONMENT[@]};do

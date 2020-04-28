@@ -40,6 +40,36 @@ BBLAYERS += " \\
 eof
 }
 
+configure_bblayers_perl() {
+cat << EOP >> ${user_bblayers_conf}
+BBLAYERS += " \${BSPDIR}/sources/meta-openembedded/meta-perl "
+EOP
+}
+
+configure_bblayers_mono() {
+cat << EOP >> ${user_bblayers_conf}
+BBLAYERS += " \${BSPDIR}/sources/meta-mono "
+EOP
+}
+
+configure_bblayers_security() {
+cat << EOP >> ${user_bblayers_conf}
+BBLAYERS += " \${BSPDIR}/sources/meta-security "
+EOP
+}
+
+configure_bblayers_dotnet_core() {
+cat << EOP >> ${user_bblayers_conf}
+BBLAYERS += " \${BSPDIR}/sources/meta-dotnet-core "
+EOP
+}
+
+configure_bblayers_marlin() {
+cat << EOP >> ${user_bblayers_conf}
+BBLAYERS += " \${BSPDIR}/sources/meta-marlin "
+EOP
+}
+
 mod_local() {
 # Modify local.conf
 CORE_IMAGE_EXTRA_INSTALL+=" dhcp-client memtester cl-uboot cl-deploy cl-launcher bt-start cl-stest cl-camera u-boot-fw-utils imx-gpu-viv-demos"
@@ -111,6 +141,12 @@ eom
 mod_bblayer
 mod_local
 add_bbmask
+
+configure_bblayers_perl
+configure_bblayers_mono
+configure_bblayers_security
+configure_bblayers_dotnet_core
+configure_bblayers_marlin
 
 cat << eom
     Note: Files ${BBLAYERS_CONF} and ${LOCAL_CONF} updated successfully.

@@ -19,36 +19,311 @@ IMAGE_FEATURES += "read-only-rootfs"
 EOP
 }
 
-declare -A ARRAYNAME=( [chrome]="yes" [rootfs]="rw" )
+configure_qt5() {
+cat << EOP >> ${user_local_conf}
+
+#Add qt5.14
+PACKAGECONFIG_append_pn-qtbase = " accessibility"
+
+IMAGE_INSTALL_append = " \
+    qt3d \
+    qt3d-dev \
+    qt3d-mkspecs \
+	qt3d-qmlplugins \
+	qt3d-tools \
+    qtcharts \
+    qtcharts-dev \
+    qtcharts-mkspecs \
+    qtconnectivity-dev \
+    qtconnectivity-mkspecs \
+    qtquickcontrols2 \
+	qtquickcontrols \
+    qtquickcontrols-qmlplugins \
+    qtquickcontrols2 \
+    qtquickcontrols2-qmlplugins \
+    qtquickcontrols2-dev \
+    qtquickcontrols2-mkspecs \
+    qtdeclarative \
+    qtdeclarative-dev \
+    qtdeclarative-mkspecs \
+	qtdeclarative-plugins \
+	qtdeclarative-tools \
+	qtdeclarative-qmlplugins \
+    qtgraphicaleffects \
+    qtgraphicaleffects-dev \
+	qtgraphicaleffects-qmlplugins \		
+	qtsvg \
+	qtsvg-plugins \
+	qtsensors \
+	qtimageformats-plugins \
+	qtsystems \
+	qtsystems-tools \
+	qtsystems-qmlplugins \
+	qtscript \
+	qtconnectivity-dev \
+	qtconnectivity-mkspecs \
+	qtconnectivity-qmlplugins \
+	qtlocation-plugins \
+	qtlocation-qmlplugins \
+	qtvirtualkeyboard \
+"
+
+IMAGE_INSTALL_append = " \
+	qtmultimedia \
+	qtmultimedia-plugins \
+	qtmultimedia-qmlplugins \
+"
+
+IMAGE_INSTALL_append = " \
+	gstreamer1.0 \
+   	gstreamer1.0-libav \
+   	gstreamer1.0-plugins-good \
+   	gstreamer1.0-plugins-bad \
+"
+
+IMAGE_INSTALL_append = " \
+    qtbase \
+    qtbase-dev \
+    qtbase-mkspecs \
+    qtbase-plugins \
+    qtbase-tools \
+"
+
+EOP
+}
+
+
+configure_sftp() {
+cat << EOP >> ${user_local_conf}
+
+#Add openssh
+CORE_IMAGE_EXTRA_INSTALL += " openssh "
+
+IMAGE_INSTALL_append = " \
+	openssh-sftp-server \
+"
+
+EOP
+}
+
+
+configure_mono() {
+cat << EOP >> ${user_local_conf}
+
+#Add mono packages
+IMAGE_INSTALL_append = " \
+	mono \
+"
+
+EOP
+}
+
+configure_deploy() {
+cat << EOP >> ${user_local_conf}
+
+#Add additional dependecies added by compulab on cl_deploy
+IMAGE_INSTALL_append = " \
+	parted \
+	zlib \
+"
+
+EOP
+}
+
+configure_xmlsec() {
+cat << EOP >> ${user_local_conf}
+
+IMAGE_INSTALL_append = " \
+	xmlsec1 \
+"
+
+PREFERRED_VERSION_xmlsec1-\${TARGET_ARCH} ?= "1.2.29"
+
+EOP
+}
+
+configure_dpkg() {
+cat << EOP >> ${user_local_conf}
+
+IMAGE_INSTALL_append = " \
+	dpkg \
+"
+
+EOP
+}
+
+configure_marlinui() {
+cat << EOP >> ${user_local_conf}
+
+IMAGE_INSTALL_append = " \
+	marlinui \
+"
+
+EOP
+}
+
+configure_boost() {
+cat << EOP >> ${user_local_conf}
+
+IMAGE_INSTALL_append = " \
+	boost \
+"
+PREFERRED_VERSION_boost-\${TARGET_ARCH} ?= "1.67.0"
+
+EOP
+}
+
+configure_dotnet() {
+cat << EOP >> ${user_local_conf}
+
+#.NET dependencies
+CORE_IMAGE_EXTRA_INSTALL += " libunwind icu libcurl openssl "
+
+#It is strongly recommended to use curl with OpenSSL backend.
+PACKAGECONFIG_pn-curl = 'vers krb5 ssl zlib ipv6'
+
+#Check curl recipe for comple set of options. For debugging you may also add
+CORE_IMAGE_EXTRA_INSTALL += " curl "
+
+PREFERRED_VERSION_dotnet-core = "3.1.0"
+CORE_IMAGE_EXTRA_INSTALL  += " aspnet-core vsdbg "
+EOP
+}
+
+configure_python() {
+cat << EOP >> ${user_local_conf}
+
+# Add python 3
+CORE_IMAGE_EXTRA_INSTALL += " python3 python3-pip "
+
+EOP
+}
+
+configure_git() {
+cat << EOP >> ${user_local_conf}
+
+# Add git
+CORE_IMAGE_EXTRA_INSTALL += " git "
+
+EOP
+}
+
+configure_gcc() {
+cat << EOP >> ${user_local_conf}
+GCCVERSION ?= "8.%"
+PREFERRED_VERSION_gcc-cross-\${TARGET_ARCH} ?= "8%"
+
+EOP
+}
+
+upgrade_lttng() {
+cat << EOP >> ${user_local_conf}
+#Upgrade lttng to 2.11.0 because the version from sumo branch has an issue related to .net core 3 or greater
+PREFERRED_VERSION_lttng-\${TARGET_ARCH} ?= "2.11.0"
+
+EOP
+}
+
+add_libstdc() {
+cat << EOP >> ${user_local_conf}
+IMAGE_INSTALL_append = " \
+	libstdc++\
+	libstdc++-staticdev \
+"
+
+TOOLCHAIN_TARGET_TASK_append = " libstdc++-staticdev"
+
+EOP
+}
+
+configure_virtualkeyboard() {
+cat << EOP >> ${user_local_conf}
+MACHINE_FEATURES += " touchscreen "
+
+EOP
+}
+
+configure_cmake() {
+cat << EOP >> ${user_local_conf}
+
+PREFERRED_VERSION_cmake-\${TARGET_ARCH} ?= "3.16.5"
+
+EOP
+}
+
+configure_libarchive() {
+cat << EOP >> ${user_local_conf}
+
+PREFERRED_VERSION_libarchive-${TARGET_ARCH} ?= "3.4.1"
+
+EOP
+}
+
+configure_libxcrypt() {
+cat << EOP >> ${user_local_conf}
+
+PREFERRED_VERSION_libxcrypt-${TARGET_ARCH} ?= "4.1.1"
+
+EOP
+}
+
+configure_systemd() {
+cat << EOP >> ${user_local_conf}
+
+# Enable systemd
+DISTRO_FEATURES_append = " systemd "
+DISTRO_FEATURES_BACKFILL_CONSIDERED = "sysvinit"
+VIRTUAL-RUNTIME_init_manager = "systemd"
+VIRTUAL-RUNTIME_initscripts = ""
+
+EOP
+}
+
+fix_firmware_bcm4339_issue() {
+cat << EOP >> ${user_local_conf}
+RREPLACES_\${PN}-bcm4339 += "linux-firmware-bcm4339"
+RCONFLICTS_\${PN}-bcm4339 += "linux-firmware-bcm4339 linux-firmware"
+EOP
+}
+
+remove_packagegroup_qt5_demos() {
+cat << EOP >> ${user_local_conf}
+QT5_IMAGE_INSTALL_remove += " packagegroup-qt5-demos"
+EOP
+}
+
+#this fix was moved to qtbase_%.bbappend under marlin layer
+remove_xcb_xinput() {
+cat << EOP >> ${user_local_conf}
+#xcb-input case configuration issue on qt5, possible because of the old version of xorg-lib from sumo branch of poky layers (xorg-lib is located under the poky folder, meta\recipes-graphics)
+PACKAGECONFIG_X11_remove += " xcb-xinput "
+EOP
+}
 
 cat << EOG
 --- Users' Configurations started ---
 EOG
 
-for ARRAY in ${!ARRAYNAME[@]}; do
-select_string='default '
-eval array=\${${ARRAY}[@]}
-for value in ${array[@]}; do
-select_string+=${value}" "
-done # for value
-PS3="${ARRAY} configuration [ ${ARRAYNAME[${ARRAY}]} ] (Ctrl^C -- exit) : "
-select i in $select_string; do
-[[ -z ${i} ]] && echo "Invalid option -(" || case $i in
-	default)
-	break
-	;;
-	*)
-	ARRAYNAME[${ARRAY}]=${i}
-	break
-	;;
-esac
-done # select
-done # for ARRAY
-
-for ARRAY in ${!ARRAYNAME[@]}; do
-command -v cfg_${ARRAY} &>/dev/null
-[[ $? -eq 0 ]] && cfg_${ARRAY} ${ARRAYNAME[${ARRAY}]}
-done
+cfg_chrome
+configure_qt5
+configure_sftp
+configure_mono
+configure_deploy
+configure_xmlsec
+configure_dotnet
+configure_boost
+configure_python
+configure_git
+configure_gcc
+upgrade_lttng
+configure_dpkg
+configure_virtualkeyboard
+configure_cmake
+configure_libarchive
+configure_libxcrypt
+configure_systemd
+remove_packagegroup_qt5_demos
+fix_firmware_bcm4339_issue
 
 if [[ -f ${local_conf} ]];then
 cat << EOH >> ${local_conf}
