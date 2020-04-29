@@ -326,6 +326,7 @@ remove_packagegroup_qt5_demos
 fix_firmware_bcm4339_issue
 
 if [[ -f ${local_conf} ]];then
+echo "Write local configuration"
 cat << EOH >> ${local_conf}
 
 # Users' Configurations
