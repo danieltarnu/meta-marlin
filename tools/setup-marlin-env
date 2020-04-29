@@ -41,31 +41,31 @@ eof
 }
 
 configure_bblayers_perl() {
-cat << EOP >> ${user_bblayers_conf}
+cat << eof | tee -a ${BBLAYERS_CONF} > /dev/null
 BBLAYERS += " \${BSPDIR}/sources/meta-openembedded/meta-perl "
 EOP
 }
 
 configure_bblayers_mono() {
-cat << EOP >> ${user_bblayers_conf}
+cat << eof | tee -a ${BBLAYERS_CONF} > /dev/null
 BBLAYERS += " \${BSPDIR}/sources/meta-mono "
 EOP
 }
 
 configure_bblayers_security() {
-cat << EOP >> ${user_bblayers_conf}
+cat << eof | tee -a ${BBLAYERS_CONF} > /dev/null
 BBLAYERS += " \${BSPDIR}/sources/meta-security "
 EOP
 }
 
 configure_bblayers_dotnet_core() {
-cat << EOP >> ${user_bblayers_conf}
+cat << eof | tee -a ${BBLAYERS_CONF} > /dev/null
 BBLAYERS += " \${BSPDIR}/sources/meta-dotnet-core "
 EOP
 }
 
 configure_bblayers_marlin() {
-cat << EOP >> ${user_bblayers_conf}
+cat << eof | tee -a ${BBLAYERS_CONF} > /dev/null
 BBLAYERS += " \${BSPDIR}/sources/meta-marlin "
 EOP
 }
