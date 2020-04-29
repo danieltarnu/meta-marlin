@@ -43,31 +43,31 @@ eof
 configure_bblayers_perl() {
 cat << eof | tee -a ${BBLAYERS_CONF} > /dev/null
 BBLAYERS += " \${BSPDIR}/sources/meta-openembedded/meta-perl "
-EOP
+eof
 }
 
 configure_bblayers_mono() {
 cat << eof | tee -a ${BBLAYERS_CONF} > /dev/null
 BBLAYERS += " \${BSPDIR}/sources/meta-mono "
-EOP
+eof
 }
 
 configure_bblayers_security() {
 cat << eof | tee -a ${BBLAYERS_CONF} > /dev/null
 BBLAYERS += " \${BSPDIR}/sources/meta-security "
-EOP
+eof
 }
 
 configure_bblayers_dotnet_core() {
 cat << eof | tee -a ${BBLAYERS_CONF} > /dev/null
 BBLAYERS += " \${BSPDIR}/sources/meta-dotnet-core "
-EOP
+eof
 }
 
 configure_bblayers_marlin() {
 cat << eof | tee -a ${BBLAYERS_CONF} > /dev/null
 BBLAYERS += " \${BSPDIR}/sources/meta-marlin "
-EOP
+eof
 }
 
 mod_local() {
