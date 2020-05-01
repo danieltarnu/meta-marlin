@@ -3,6 +3,8 @@ MACHINE=${MACHINE:-ucm-imx8m-mini}
 DISTRO=${DISTRO:-fsl-imx-xwayland}
 EULA=1
 
+echo pwd
+
 . fsl-setup-release.sh $@
 
 declare -a ENVIRONMENT=('../sources/meta-marlin/tools/setup-marlin-env \
