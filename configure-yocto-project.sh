@@ -47,8 +47,8 @@ source sources/meta-marlin/tools/setup-imx8mm-env -b build-xwayland
 #change_folder "/opt/nxp"
 
 #clone_repositories
-change_folder "/opt/nxp"
+change_folder "/home/build/opt/nxp"
 configure_build_environment
-change_folder "/opt/nxp/build-xwayland"
+change_folder "/home/build/opt/nxp/build-xwayland"
 
 bitbake -c populate_sdk compulab-qt5-build-env
