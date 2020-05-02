@@ -300,6 +300,16 @@ PACKAGECONFIG_X11_remove += " xcb-xinput "
 EOP
 }
 
+configure_vim() {
+cat << EOP >> ${user_local_conf}
+
+IMAGE_INSTALL_append = " \
+	vim \
+"
+
+EOP
+}
+
 cat << EOG
 --- Users' Configurations started ---
 EOG
@@ -324,6 +334,7 @@ configure_libxcrypt
 configure_systemd
 remove_packagegroup_qt5_demos
 fix_firmware_bcm4339_issue
+configure_vim
 
 if [[ -f ${local_conf} ]];then
 echo "Write local configuration"
