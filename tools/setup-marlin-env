@@ -143,9 +143,9 @@ mod_local
 add_bbmask
 
 configure_bblayers_perl
-configure_bblayers_mono
+#configure_bblayers_mono
 configure_bblayers_security
-configure_bblayers_dotnet_core
+#configure_bblayers_dotnet_core
 configure_bblayers_marlin
 
 cat << eom
