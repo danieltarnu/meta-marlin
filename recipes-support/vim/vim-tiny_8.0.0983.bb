@@ -1,11 +1,12 @@
-require vim.inc
+require vim_${PV}.bb
 
 SUMMARY += " (with tiny features)"
 
 PACKAGECONFIG += "tiny"
 
 do_install() {
-    install -D -m 0755 ${S}/src/vim ${D}/${bindir}/vim.tiny
+    install -d ${D}/${bindir}
+    install -m 0755 ${S}/vim ${D}/${bindir}/vim.tiny
 }
 
 ALTERNATIVE_PRIORITY = "90"

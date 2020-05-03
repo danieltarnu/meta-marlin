@@ -1,61 +1,42 @@
 SUMMARY = "Vi IMproved - enhanced vi editor"
 SECTION = "console/utils"
-
 DEPENDS = "ncurses gettext-native"
 # vimdiff doesn't like busybox diff
 RSUGGESTS_${PN} = "diffutils"
 LICENSE = "vim"
-LIC_FILES_CHKSUM = "file://runtime/doc/uganda.txt;endline=287;md5=a19edd7ec70d573a005d9e509375a99a"
+LIC_FILES_CHKSUM = "file://../runtime/doc/uganda.txt;md5=eea32ac1424bba14096736a494ae9045"
 
 SRC_URI = "git://github.com/vim/vim.git \
-           file://disable_acl_header_check.patch \
-           file://vim-add-knob-whether-elf.h-are-checked.patch \
-           file://0001-src-Makefile-improve-reproducibility.patch \
+           file://disable_acl_header_check.patch;patchdir=.. \
+           file://vim-add-knob-whether-elf.h-are-checked.patch;patchdir=.. \
+           file://CVE-2017-17087.patch;patchdir=.. \
 "
-SRCREV = "98056533b96b6b5d8849641de93185dd7bcadc44"
+SRCREV = "3f9a1ff141412e9e85f7dff47d02946cb9be9228"
 
-# Do not consider .z in x.y.z, as that is updated with every commit
-UPSTREAM_CHECK_GITTAGREGEX = "(?P<pver>\d+\.\d+)\.0"
-
-S = "${WORKDIR}/git"
+S = "${WORKDIR}/git/src"
 
 VIMDIR = "vim${@d.getVar('PV').split('.')[0]}${@d.getVar('PV').split('.')[1]}"
 
-inherit autotools-brokensep update-alternatives mime-xdg
+inherit autotools-brokensep update-alternatives
 
 CLEANBROKEN = "1"
 
 # vim configure.in contains functions which got 'dropped' by autotools.bbclass
 do_configure () {
-    cd src
     rm -f auto/*
     touch auto/config.mk
     aclocal
     autoconf
-    cd ..
     oe_runconf
-    touch src/auto/configure
-    touch src/auto/config.mk src/auto/config.h
-}
-
-do_compile() {
-    # We do not support fully / correctly the following locales.  Attempting
-    # to use these with msgfmt in order to update the ".desktop" files exposes
-    # this problem and leads to the compile failing.
-    for LOCALE in cs fr ko pl sk zh_CN zh_TW;do
-        echo -n > src/po/${LOCALE}.po
-    done
-    autotools_do_compile
+    touch auto/configure
+    touch auto/config.mk auto/config.h
 }
 
 #Available PACKAGECONFIG options are gtkgui, acl, x11, tiny
 PACKAGECONFIG ??= ""
-PACKAGECONFIG += " \
-    ${@bb.utils.filter('DISTRO_FEATURES', 'acl selinux', d)} \
-    ${@bb.utils.contains('DISTRO_FEATURES', 'x11', 'x11 gtkgui', '', d)} \
-"
+PACKAGECONFIG += "${@bb.utils.filter('DISTRO_FEATURES', 'acl selinux', d)}"
 
-PACKAGECONFIG[gtkgui] = "--enable-gui=gtk3,--enable-gui=no,gtk+3"
+PACKAGECONFIG[gtkgui] = "--enable-gtk2-test --enable-gui=gtk2,--enable-gui=no,gtk+,"
 PACKAGECONFIG[acl] = "--enable-acl,--disable-acl,acl,"
 PACKAGECONFIG[x11] = "--with-x,--without-x,xt,"
 PACKAGECONFIG[tiny] = "--with-features=tiny,--with-features=big,,"
@@ -73,7 +54,7 @@ EXTRA_OECONF = " \
     vim_cv_memmove_handles_overlap=yes \
     vim_cv_stat_ignores_slash=no \
     vim_cv_terminfo=yes \
-    vim_cv_tgetent=non-zero \
+    vim_cv_tgent=non-zero \
     vim_cv_toupper_broken=no \
     vim_cv_tty_group=world \
     STRIP=/bin/true \
@@ -89,17 +70,10 @@ do_install() {
     chmod -x ${D}${datadir}/${BPN}/${VIMDIR}/tools/*.py
 
     # Install example vimrc from runtime files
-    install -m 0644 runtime/vimrc_example.vim ${D}/${datadir}/${BPN}/vimrc
+    install -m 0644 ../runtime/vimrc_example.vim ${D}/${datadir}/${BPN}/vimrc
 
     # we use --with-features=big as default
     mv ${D}${bindir}/${BPN} ${D}${bindir}/${BPN}.${BPN}
-
-    if ${@bb.utils.contains('DISTRO_FEATURES', 'x11', 'true', 'false', d)}; then
-	# The mouse being autoenabled is just annoying in xfce4-terminal (mouse
-	# drag make vim go into visual mode and there is no right click menu),
-	# delete the block.
-	sed -i '/the mouse works just fine/,+4d' ${D}/${datadir}/${BPN}/vimrc
-    fi
 }
 
 PARALLEL_MAKEINST = ""
@@ -132,7 +106,9 @@ RDEPENDS_${BPN} = "ncurses-terminfo-base"
 RRECOMMENDS_${BPN} = "${PN}-syntax ${PN}-help ${PN}-tutor ${PN}-vimrc ${PN}-common"
 
 ALTERNATIVE_${PN} = "vi vim"
-ALTERNATIVE_PRIORITY = "100"
 ALTERNATIVE_TARGET = "${bindir}/${BPN}.${BPN}"
 ALTERNATIVE_LINK_NAME[vi] = "${base_bindir}/vi"
 ALTERNATIVE_LINK_NAME[vim] = "${bindir}/vim"
+ALTERNATIVE_PRIORITY = "100"
+
+BBCLASSEXTEND = "native"
