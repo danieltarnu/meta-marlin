@@ -32,7 +32,7 @@ rm -rf sources/meta-qt5
 
 git clone -b master "https://github.com/danieltarnu/meta-qt5.git" sources/meta-qt5
 
-cp sources/meta-marlin/configure-yocto-project.sh ./
+#cp sources/meta-marlin/poky/meta/classes/mime-xdg.bbclass sources/poky/meta/classes/mime-xdg.bbclass
 
 }
 
