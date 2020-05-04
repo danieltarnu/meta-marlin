@@ -25,68 +25,68 @@ cat << EOP >> ${user_local_conf}
 #Add qt5.14
 PACKAGECONFIG_append_pn-qtbase = " accessibility"
 
-IMAGE_INSTALL_append = " \
-    qt3d \
-    qt3d-dev \
-    qt3d-mkspecs \
-	qt3d-qmlplugins \
-	qt3d-tools \
-    qtcharts \
-    qtcharts-dev \
-    qtcharts-mkspecs \
-    qtconnectivity-dev \
-    qtconnectivity-mkspecs \
-    qtquickcontrols2 \
-	qtquickcontrols \
-    qtquickcontrols-qmlplugins \
-    qtquickcontrols2 \
-    qtquickcontrols2-qmlplugins \
-    qtquickcontrols2-dev \
-    qtquickcontrols2-mkspecs \
-    qtdeclarative \
-    qtdeclarative-dev \
-    qtdeclarative-mkspecs \
-	qtdeclarative-plugins \
-	qtdeclarative-tools \
-	qtdeclarative-qmlplugins \
-    qtgraphicaleffects \
-    qtgraphicaleffects-dev \
-	qtgraphicaleffects-qmlplugins \		
-	qtsvg \
-	qtsvg-plugins \
-	qtsensors \
-	qtimageformats-plugins \
-	qtsystems \
-	qtsystems-tools \
-	qtsystems-qmlplugins \
-	qtscript \
-	qtconnectivity-dev \
-	qtconnectivity-mkspecs \
-	qtconnectivity-qmlplugins \
-	qtlocation-plugins \
-	qtlocation-qmlplugins \
-	qtvirtualkeyboard \
+IMAGE_INSTALL_append = " \\
+    qt3d \\
+    qt3d-dev \\
+    qt3d-mkspecs \\
+	qt3d-qmlplugins \\
+	qt3d-tools \\
+    qtcharts \\
+    qtcharts-dev \\
+    qtcharts-mkspecs \\
+    qtconnectivity-dev \\
+    qtconnectivity-mkspecs \\
+    qtquickcontrols2 \\
+	qtquickcontrols \\
+    qtquickcontrols-qmlplugins \\
+    qtquickcontrols2 \\
+    qtquickcontrols2-qmlplugins \\
+    qtquickcontrols2-dev \\
+    qtquickcontrols2-mkspecs \\
+    qtdeclarative \\
+    qtdeclarative-dev \\
+    qtdeclarative-mkspecs \\
+	qtdeclarative-plugins \\
+	qtdeclarative-tools \\
+	qtdeclarative-qmlplugins \\
+    qtgraphicaleffects \\
+    qtgraphicaleffects-dev \\
+	qtgraphicaleffects-qmlplugins \\		
+	qtsvg \\
+	qtsvg-plugins \\
+	qtsensors \\
+	qtimageformats-plugins \\
+	qtsystems \\
+	qtsystems-tools \\
+	qtsystems-qmlplugins \\
+	qtscript \\
+	qtconnectivity-dev \\
+	qtconnectivity-mkspecs \\
+	qtconnectivity-qmlplugins \\
+	qtlocation-plugins \\
+	qtlocation-qmlplugins \\
+	qtvirtualkeyboard \\
 "
 
-IMAGE_INSTALL_append = " \
-	qtmultimedia \
-	qtmultimedia-plugins \
-	qtmultimedia-qmlplugins \
+IMAGE_INSTALL_append = " \\
+	qtmultimedia \\
+	qtmultimedia-plugins \\
+	qtmultimedia-qmlplugins \\
 "
 
-IMAGE_INSTALL_append = " \
-	gstreamer1.0 \
-   	gstreamer1.0-libav \
-   	gstreamer1.0-plugins-good \
-   	gstreamer1.0-plugins-bad \
+IMAGE_INSTALL_append = " \\
+	gstreamer1.0 \\
+   	gstreamer1.0-libav \\
+   	gstreamer1.0-plugins-good \\
+   	gstreamer1.0-plugins-bad \\
 "
 
-IMAGE_INSTALL_append = " \
-    qtbase \
-    qtbase-dev \
-    qtbase-mkspecs \
-    qtbase-plugins \
-    qtbase-tools \
+IMAGE_INSTALL_append = " \\
+    qtbase \\
+    qtbase-dev \\
+    qtbase-mkspecs \\
+    qtbase-plugins \\
+    qtbase-tools \\
 "
 
 EOP
@@ -99,8 +99,8 @@ cat << EOP >> ${user_local_conf}
 #Add openssh
 CORE_IMAGE_EXTRA_INSTALL += " openssh "
 
-IMAGE_INSTALL_append = " \
-	openssh-sftp-server \
+IMAGE_INSTALL_append = " \\
+	openssh-sftp-server \\
 "
 
 EOP
@@ -111,8 +111,8 @@ configure_mono() {
 cat << EOP >> ${user_local_conf}
 
 #Add mono packages
-IMAGE_INSTALL_append = " \
-	mono \
+IMAGE_INSTALL_append = " \\
+	mono \\
 "
 
 EOP
@@ -122,9 +122,9 @@ configure_deploy() {
 cat << EOP >> ${user_local_conf}
 
 #Add additional dependecies added by compulab on cl_deploy
-IMAGE_INSTALL_append = " \
-	parted \
-	zlib \
+IMAGE_INSTALL_append = " \\
+	parted \\
+	zlib \\
 "
 
 EOP
@@ -133,8 +133,8 @@ EOP
 configure_xmlsec() {
 cat << EOP >> ${user_local_conf}
 
-IMAGE_INSTALL_append = " \
-	xmlsec1 \
+IMAGE_INSTALL_append = " \\
+	xmlsec1 \\
 "
 
 PREFERRED_VERSION_xmlsec1-\${TARGET_ARCH} ?= "1.2.29"
@@ -145,8 +145,8 @@ EOP
 configure_dpkg() {
 cat << EOP >> ${user_local_conf}
 
-IMAGE_INSTALL_append = " \
-	dpkg \
+IMAGE_INSTALL_append = " \\
+	dpkg \\
 "
 
 EOP
@@ -155,8 +155,8 @@ EOP
 configure_marlinui() {
 cat << EOP >> ${user_local_conf}
 
-IMAGE_INSTALL_append = " \
-	marlinui \
+IMAGE_INSTALL_append = " \\
+	marlinui \\
 "
 
 EOP
@@ -165,8 +165,8 @@ EOP
 configure_boost() {
 cat << EOP >> ${user_local_conf}
 
-IMAGE_INSTALL_append = " \
-	boost \
+IMAGE_INSTALL_append = " \\
+	boost \\
 "
 PREFERRED_VERSION_boost-\${TARGET_ARCH} ?= "1.67.0"
 
@@ -186,7 +186,8 @@ PACKAGECONFIG_pn-curl = 'vers krb5 ssl zlib ipv6'
 CORE_IMAGE_EXTRA_INSTALL += " curl "
 
 PREFERRED_VERSION_dotnet-core = "3.1.0"
-CORE_IMAGE_EXTRA_INSTALL  += " aspnet-core vsdbg "
+CORE_IMAGE_EXTRA_INSTALL  += " aspnet-core "
+#CORE_IMAGE_EXTRA_INSTALL  += " vsdbg "
 EOP
 }
 
@@ -226,9 +227,9 @@ EOP
 
 add_libstdc() {
 cat << EOP >> ${user_local_conf}
-IMAGE_INSTALL_append = " \
-	libstdc++\
-	libstdc++-staticdev \
+IMAGE_INSTALL_append = " \\
+	libstdc++\\
+	libstdc++-staticdev \\
 "
 
 TOOLCHAIN_TARGET_TASK_append = " libstdc++-staticdev"
@@ -303,8 +304,8 @@ EOP
 configure_vim() {
 cat << EOP >> ${user_local_conf}
 
-IMAGE_INSTALL_append = " \
-	vim \
+IMAGE_INSTALL_append = " \\
+	vim \\
 "
 
 EOP
@@ -314,18 +315,18 @@ cat << EOG
 --- Users' Configurations started ---
 EOG
 
-#cfg_chrome
+cfg_chrome
 configure_qt5
 configure_sftp
-#configure_mono
+configure_mono
 configure_deploy
 configure_xmlsec
-#configure_dotnet
+configure_dotnet
 configure_boost
 configure_python
 configure_git
 configure_gcc
-#upgrade_lttng
+upgrade_lttng
 configure_dpkg
 configure_virtualkeyboard
 configure_cmake
