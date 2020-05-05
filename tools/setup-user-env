@@ -311,17 +311,27 @@ IMAGE_INSTALL_append = " \\
 EOP
 }
 
+configure_zsh() {
+cat << EOP >> ${user_local_conf}
+
+IMAGE_INSTALL_append = " \\
+	zsh \\
+"
+
+EOP
+}
+
 cat << EOG
 --- Users' Configurations started ---
 EOG
 
-cfg_chrome
+#cfg_chrome
 configure_qt5
 configure_sftp
-configure_mono
+#configure_mono
+#configure_dotnet
 configure_deploy
 configure_xmlsec
-configure_dotnet
 configure_boost
 configure_python
 configure_git
@@ -336,6 +346,7 @@ configure_systemd
 remove_packagegroup_qt5_demos
 fix_firmware_bcm4339_issue
 configure_vim
+configure_zsh
 
 if [[ -f ${local_conf} ]];then
 echo "Write local configuration"

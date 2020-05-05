@@ -3,7 +3,7 @@ MACHINE=${MACHINE:-ucm-imx8m-mini}
 DISTRO=${DISTRO:-fsl-imx-xwayland}
 EULA=1
 
-pwd
+cp -f ../sources/meta-marlin/poky/meta/classes/mime-xdg.bbclass ../sources/poky/meta/classes/mime-xdg.bbclass
 
 . fsl-setup-release.sh $@
 
