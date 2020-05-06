@@ -1,3 +1,4 @@
+#https://git.congatec.com/yocto/meta-openembedded/blob/27bb27f8780896663eeaa502456aefa3828a030c/meta-oe/recipes-extended/zsh/zsh_5.0.5.bb
 SUMMARY = "UNIX Shell similar to the Korn shell"
 DESCRIPTION = "Zsh is a shell designed for interactive use, although it is also a \
                powerful scripting language. Many of the useful features of bash, \
