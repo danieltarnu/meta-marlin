@@ -6,13 +6,13 @@ HOMEPAGE = "http://www.zsh.org"
 SECTION = "base/shell"
 
 LICENSE = "zsh"
-LIC_FILES_CHKSUM = "file://LICENCE;md5=1a4c4cda3e8096d2fd483ff2f4514fec"
+LIC_FILES_CHKSUM = "file://LICENCE;md5=b7bc853894664be455a922db9805288e"
 
 DEPENDS = "ncurses bison-native libcap libpcre gdbm groff-native"
 
-SRC_URI = "https://vorboss.dl.sourceforge.net/project/zsh/zsh/5.7.1/zsh-5.7.1.tar.xz"
-SRC_URI[md5sum] = "374f9fdd121b5b90e07abfcad7df0627"
-SRC_URI[sha256sum] = "7260292c2c1d483b2d50febfa5055176bd512b32a8833b116177bf5f01e77ee8"
+SRC_URI = "https://netcologne.dl.sourceforge.net/project/zsh/zsh/5.0.5/zsh-5.0.5.tar.gz"
+SRC_URI[md5sum] = "6fb0e3e52a0f8de5ca63138391b81ce0"
+SRC_URI[sha256sum] = "b35cf19e4a6ba39fd03c6372b8a8760a491cc2e2e4aba3d15023ff291c2894b4"
 
 inherit autotools gettext update-alternatives
 

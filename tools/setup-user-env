@@ -318,6 +318,8 @@ IMAGE_INSTALL_append = " \\
 	zsh \\
 "
 
+PREFERRED_VERSION_zsh-${TARGET_ARCH} ?= "5.0.5"
+
 EOP
 }
 
