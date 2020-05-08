@@ -173,6 +173,20 @@ PREFERRED_VERSION_boost-\${TARGET_ARCH} ?= "1.67.0"
 EOP
 }
 
+configure_curl() {
+cat << EOP >> ${user_local_conf}
+#Check curl recipe for comple set of options. For debugging you may also add
+CORE_IMAGE_EXTRA_INSTALL += " curl "
+
+#.NET dependencies
+CORE_IMAGE_EXTRA_INSTALL += " libunwind icu libcurl openssl "
+
+#It is strongly recommended to use curl with OpenSSL backend.
+PACKAGECONFIG_pn-curl = 'vers krb5 ssl zlib ipv6'
+
+EOP
+}
+
 configure_dotnet() {
 cat << EOP >> ${user_local_conf}
 
@@ -311,6 +325,18 @@ IMAGE_INSTALL_append = " \\
 EOP
 }
 
+configure_libusb() {
+cat << EOP >> ${user_local_conf}
+
+IMAGE_INSTALL_append = " \\
+	libusb1 \\
+"
+
+PREFERRED_VERSION_libusb1-${TARGET_ARCH} ?= "1.0.22"
+
+EOP
+}
+
 configure_zsh() {
 cat << EOP >> ${user_local_conf}
 
@@ -327,11 +353,12 @@ cat << EOG
 --- Users' Configurations started ---
 EOG
 
-#cfg_chrome
+cfg_chrome
 configure_qt5
 configure_sftp
-#configure_mono
-#configure_dotnet
+#configure_curl
+configure_mono
+configure_dotnet
 configure_deploy
 configure_xmlsec
 configure_boost
@@ -349,6 +376,7 @@ remove_packagegroup_qt5_demos
 fix_firmware_bcm4339_issue
 configure_vim
 configure_zsh
+configure_libusb
 
 if [[ -f ${local_conf} ]];then
 echo "Write local configuration"
