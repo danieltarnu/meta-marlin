@@ -330,9 +330,10 @@ cat << EOP >> ${user_local_conf}
 
 IMAGE_INSTALL_append = " \\
 	libusb1 \\
+	libusb-compat \\
 "
 
-PREFERRED_VERSION_libusb1-${TARGET_ARCH} ?= "1.0.22"
+PREFERRED_VERSION_libusb1-${TARGET_ARCH} ?= "1.0.21"
 
 EOP
 }
