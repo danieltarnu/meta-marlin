@@ -11,6 +11,6 @@ SRC_URI[sha256sum] = "73ebfe9dbf22e832286dafa60473e4cd239f8592f699aa5adaf10050e6
 
 S = "${WORKDIR}/python-dateutil-2.8.1"
 
-RDEPENDS_${PN} = "python-six"
+RDEPENDS_${PN} = "python3-six"
 
-inherit setuptools
+inherit setuptools3
