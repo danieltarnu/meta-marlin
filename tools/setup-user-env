@@ -209,7 +209,13 @@ configure_python() {
 cat << EOP >> ${user_local_conf}
 
 # Add python 3
-CORE_IMAGE_EXTRA_INSTALL += " python3 python3-pip python3-aws-iot-device-sdk-python python3-requests python3-boto3 python3-botocore "
+IMAGE_INSTALL_append = " \\
+		python3 \\
+		python3-pip \\ 
+		python3-aws-iot-device-sdk-python \\ 
+		python3-requests \\ 
+		python3-boto3 \\ 
+		python3-botocore \\ "
 EOP
 }
 
