@@ -326,7 +326,7 @@ EOP
 
 configure_vim() {
 cat << EOP >> ${user_local_conf}
-
+#vim is a text editor.
 IMAGE_INSTALL_append = " \\
 	vim \\
 "
@@ -359,6 +359,19 @@ PREFERRED_VERSION_zsh-${TARGET_ARCH} ?= "5.0.5"
 EOP
 }
 
+configure_dmidecode() {
+cat << EOP >> ${user_local_conf}
+# dmidecode is a CLI tool for depositing a computer’s DMI (SMBIOS) table contents in a human-readable format. 
+# This table contains a description of the system’s hardware components. 
+# It also includes useful pieces of information such as serial numbers and BIOS revision.
+
+IMAGE_INSTALL_append = " \\
+	dmidecode \\
+"
+
+EOP
+}
+
 cat << EOG
 --- Users' Configurations started ---
 EOG
@@ -387,6 +400,7 @@ fix_firmware_bcm4339_issue
 configure_vim
 configure_zsh
 configure_libusb
+configure_dmidecode
 
 if [[ -f ${local_conf} ]];then
 echo "Write local configuration"
