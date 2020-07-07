@@ -372,6 +372,53 @@ IMAGE_INSTALL_append = " \\
 EOP
 }
 
+configure_realteck_drivers() {
+cat << EOP >> ${user_local_conf}
+
+IMAGE_INSTALL_append = " \\
+	linux-firmware-rtl8188 \\
+	linux-firmware-rtl8192ce \\
+	linux-firmware-rtl8192cu \\
+	linux-firmware-rtl8192su \\
+	linux-firmware-rtl8723 \\
+	linux-firmware-rtl8821 \\
+	linux-firmware-rtl8168 \\
+	rtl8192eu \\
+"
+
+EOP
+}
+
+configure_ralink_drivers() {
+cat << EOP >> ${user_local_conf}
+IMAGE_INSTALL_append = " \\
+linux-firmware-ralink \\
+linux-firmware-mt7601u \\
+"
+
+EOP
+}
+
+configure_atheros_drivers(){
+cat << EOP >> ${user_local_conf}
+IMAGE_INSTALL_append = " \\
+	linux-firmware-ath9k \\
+	linux-firmware-ath6k \\
+	linux-firmware-ar9170 \\
+"
+
+EOP
+}
+
+configure_timezone(){
+cat << EOP >> ${user_local_conf}
+IMAGE_INSTALL_append = " tzdata"
+DEFAULT_TIMEZONE = "America/Los_Angeles"
+
+EOP
+}
+
+
 cat << EOG
 --- Users' Configurations started ---
 EOG
@@ -401,6 +448,10 @@ configure_vim
 configure_zsh
 configure_libusb
 configure_dmidecode
+configure_realteck_drivers
+configure_ralink_drivers
+configure_atheros_drivers
+configure_timezone
 
 if [[ -f ${local_conf} ]];then
 echo "Write local configuration"
