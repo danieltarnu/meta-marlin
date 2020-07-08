@@ -5,7 +5,7 @@ After=wpa_supplicant
 [Service]
 Type=idle
 RemainAfterExit=true
-ExecStart=/bin/bash /etc/systemd/system/start-wifi.sh
+ExecStart=/bin/bash /bin/start-wifi.sh
 
 [Install]
 WantedBy=multi-user.target
