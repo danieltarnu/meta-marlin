@@ -25,7 +25,7 @@ do_install_append() {
     install -m 0644 ${WORKDIR}/wlan.network ${D}${sysconfdir}/systemd/network
     
     # install wifi service
-    install -c -m 0755 ${WORKDIR}/start-wifi.service ${D}${sysconfdir}/system
+    install -c -m 0755 ${WORKDIR}/start-wifi.service ${D}${sysconfdir}/systemd/system
     install -Dm 0755 ${WORKDIR}/start-wifi.sh ${D}/${bindir}
     
 }
