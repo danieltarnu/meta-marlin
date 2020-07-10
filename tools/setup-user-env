@@ -430,6 +430,15 @@ VIRTUAL-RUNTIME_initscripts = "systemd-compat-units"
 EOP
 }
 
+configure_initscripts(){
+cat << EOP >> ${user_local_conf}
+IMAGE_INSTALL_append = " \\
+	initscripts \\
+"
+
+EOP
+}
+
 
 cat << EOG
 --- Users' Configurations started ---
@@ -465,6 +474,7 @@ configure_ralink_drivers
 configure_atheros_drivers
 configure_timezone
 configure_systemd
+configure_initscripts
 
 if [[ -f ${local_conf} ]];then
 echo "Write local configuration"
