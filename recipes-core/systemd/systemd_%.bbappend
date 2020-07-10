@@ -18,6 +18,12 @@ FILES_${PN} += " \
     ${bindir}/start-wifi.sh \
 "
 
+SYSTEM_SERVICE_${PN} = " \
+	start-wifi.service \
+"
+
+SYSTEM_AUTO_ENABLE_${PN} = "enable"
+
 do_install_append() {
     install -d ${D}${sysconfdir}/systemd/network
     install -m 0644 ${WORKDIR}/eth.network ${D}${sysconfdir}/systemd/network
