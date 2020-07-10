@@ -418,18 +418,6 @@ DEFAULT_TIMEZONE = "America/Los_Angeles"
 EOP
 }
 
-configure_systemd(){
-cat << EOP >> ${user_local_conf}
-# Use systemd for system initialization
-
-DISTRO_FEATURES_append = " systemd"
-DISTRO_FEATURES_BACKFILL_CONSIDERED += "sysvinit"
-VIRTUAL-RUNTIME_init_manager = "systemd"
-VIRTUAL-RUNTIME_initscripts = "systemd-compat-units"
-
-EOP
-}
-
 
 cat << EOG
 --- Users' Configurations started ---
@@ -464,7 +452,6 @@ configure_realteck_drivers
 configure_ralink_drivers
 configure_atheros_drivers
 configure_timezone
-configure_systemd
 
 if [[ -f ${local_conf} ]];then
 echo "Write local configuration"
