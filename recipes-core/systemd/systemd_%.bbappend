@@ -22,6 +22,10 @@ FILES_${PN} += " \
 #	start-wifi.service \
 #"
 
+MASKED_SCRIPTS = " \
+start-wifi \
+"
+
 SYSTEM_AUTO_ENABLE_${PN} = "enable"
 
 do_install_append() {
@@ -32,5 +36,7 @@ do_install_append() {
     
     # install wifi service
     #install -c -m 0755 ${WORKDIR}/start-wifi.service ${D}${sysconfdir}/systemd/system
-    #install -Dm 0755 ${WORKDIR}/start-wifi.sh ${D}/${bindir}    
+    #install -Dm 0755 ${WORKDIR}/start-wifi.sh ${D}/${bindir}
+    install -m 0755 ${WORKDIR}/start-wifi.sh ${D}${sysconfdir}/init.d
+    update-rc.d -r ${D} start-wifi.sh start 99 2 3 4 5 .
 }
