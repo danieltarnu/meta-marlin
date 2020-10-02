@@ -429,6 +429,9 @@ EOP
 
 configure_electron(){
 cat << EOP >> ${user_local_conf}
+
+PACKAGECONFIG_remove_pn-libcxx = "unwind"
+
 IMAGE_INSTALL_append = " \\
 	electron \\
 "
