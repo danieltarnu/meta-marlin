@@ -27,6 +27,9 @@ git clone -b sumo git://git.yoctoproject.org/meta-mono sources/meta-virtualizati
 git clone -b master https://github.com/RDunkley/meta-dotnet-core.git sources/meta-dotnet-core
 git clone -b master https://github.com/danieltarnu/meta-marlin.git sources/meta-marlin
 git clone -b master https://github.com/vulcanoio/meta-electron.git sources/meta-electron
+git clone -b master https://github.com/vulcanoio/meta-electron.git sources/meta-electron
+git clone -b sumo https://github.com/kraj/meta-clang.git sources/meta-clang
+git clone -b thud https://github.com/OSSystems/meta-browser.git sources/meta-browser
 
 echo "Removing the qt5.10 meta layer"
 rm -rf sources/meta-qt5

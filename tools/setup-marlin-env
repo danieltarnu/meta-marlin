@@ -73,6 +73,8 @@ eof
 configure_bblayers_electron() {
 cat << eof | tee -a ${BBLAYERS_CONF} > /dev/null
 BBLAYERS += " \${BSPDIR}/sources/meta-electron "
+BBLAYERS += " \${BSPDIR}/sources/meta-clang "
+BBLAYERS += " \${BSPDIR}/sources/meta-browser "
 eof
 }
 
