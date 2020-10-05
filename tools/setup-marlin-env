@@ -70,14 +70,6 @@ BBLAYERS += " \${BSPDIR}/sources/meta-marlin "
 eof
 }
 
-configure_bblayers_electron() {
-cat << eof | tee -a ${BBLAYERS_CONF} > /dev/null
-BBLAYERS += " \${BSPDIR}/sources/meta-electron "
-BBLAYERS += " \${BSPDIR}/sources/meta-clang "
-BBLAYERS += " \${BSPDIR}/sources/meta-browser "
-eof
-}
-
 mod_local() {
 # Modify local.conf
 CORE_IMAGE_EXTRA_INSTALL+=" dhcp-client memtester cl-uboot cl-deploy cl-launcher bt-start cl-stest cl-camera u-boot-fw-utils imx-gpu-viv-demos"
@@ -155,7 +147,6 @@ configure_bblayers_mono
 configure_bblayers_security
 configure_bblayers_dotnet_core
 configure_bblayers_marlin
-configure_bblayers_electron
 
 cat << eom
     Note: Files ${BBLAYERS_CONF} and ${LOCAL_CONF} updated successfully.
