@@ -349,15 +349,13 @@ EOP
 
 configure_zsh() {
 cat << EOP >> ${user_local_conf}
-
 IMAGE_INSTALL_append = " \\
-	zsh \\
+        zsh \\
 "
-
 PREFERRED_VERSION_zsh-${TARGET_ARCH} ?= "5.0.5"
-
 EOP
 }
+
 
 configure_dmidecode() {
 cat << EOP >> ${user_local_conf}
@@ -418,14 +416,33 @@ DEFAULT_TIMEZONE = "America/Los_Angeles"
 EOP
 }
 
-configure_x11vnc(){
+configure_googletest(){
 cat << EOP >> ${user_local_conf}
-IMAGE_INSTALL_append = " \\
-	x11vnc \\
-"
+IMAGE_INSTALL_append = " googletest"
+PREFERRED_PROVIDER_gmock ?= "googletest"
+PREFERRED_PROVIDER_gtest ?= "googletest"
 
 EOP
 }
+
+configure_grpc(){
+cat << EOP >> ${user_local_conf}
+IMAGE_INSTALL_append = " grpc"
+
+EOP
+}
+
+configure_protobuf(){
+cat << EOP >> ${user_local_conf}
+IMAGE_INSTALL_append = " protobuf"
+
+TOOLCHAIN_HOST_TASK_append += " nativesdk-protobuf-compiler"
+TOOLCHAIN_HOST_TASK_append += " nativesdk-protobuf"
+
+
+EOP
+}
+
 
 cat << EOG
 --- Users' Configurations started ---
@@ -460,7 +477,10 @@ configure_realteck_drivers
 configure_ralink_drivers
 configure_atheros_drivers
 configure_timezone
-configure_x11vnc
+configure_grpc
+configure_protobuf
+configure_googletest
+
 
 if [[ -f ${local_conf} ]];then
 echo "Write local configuration"
