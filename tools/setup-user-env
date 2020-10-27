@@ -418,14 +418,6 @@ DEFAULT_TIMEZONE = "America/Los_Angeles"
 EOP
 }
 
-configure_x11vnc(){
-cat << EOP >> ${user_local_conf}
-IMAGE_INSTALL_append = " \\
-	x11vnc \\
-"
-
-EOP
-}
 
 cat << EOG
 --- Users' Configurations started ---
@@ -460,7 +452,6 @@ configure_realteck_drivers
 configure_ralink_drivers
 configure_atheros_drivers
 configure_timezone
-configure_x11vnc
 
 if [[ -f ${local_conf} ]];then
 echo "Write local configuration"
