@@ -427,6 +427,13 @@ IMAGE_INSTALL_append = " \\
 EOP
 }
 
+configure_nodejs(){
+cat << EOP >> ${user_local_conf}
+IMAGE_INSTALL_append = " nodejs"
+
+EOP
+}
+
 cat << EOG
 --- Users' Configurations started ---
 EOG
@@ -461,6 +468,7 @@ configure_ralink_drivers
 configure_atheros_drivers
 configure_timezone
 configure_x11vnc
+configure_nodejs
 
 if [[ -f ${local_conf} ]];then
 echo "Write local configuration"
